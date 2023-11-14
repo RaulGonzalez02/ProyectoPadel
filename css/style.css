@@ -1,0 +1,45 @@
+body{
+    background-color: #071823ca;
+    max-width: 1200px;
+    min-height: 600px;
+    margin: 0 auto;
+    background: url(../assets/images/padel2.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    height: 900px;
+    border-radius: 10px;
+}
+.container__title,.container__subtitle{
+    font-variant: small-caps;
+    text-align: center;
+
+}
+.container__title{
+    font-size: 3.5rem;
+    margin-bottom: 0;
+}
+.container__subtitle{
+    font-size: 1.75rem;
+}
+.container__link{
+    border: 2px groove #071823ca;
+    border-radius: 3px;
+    text-decoration: none;
+    color: black;
+    font-variant: small-caps;
+    font-size: 1.2rem;
+    padding: 25px;
+}
+.container__logo{
+    display: inline-block;
+    width: 40%;
+}
