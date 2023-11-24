@@ -107,4 +107,6 @@ body{
     text-decoration: underline;
 }
 
-
+.login__error{
+    color: red;
+}
