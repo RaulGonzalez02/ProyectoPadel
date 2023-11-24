@@ -12,7 +12,7 @@
             <main class="main">
                 <section class="section__form1">
                     <h1 class="form__h1">Iniciar Sesión</h1>
-                    <form class="form" action="../recurses/php_files/login.php" method="POST">
+                    <form class="form" action="./principal.php" method="POST">
                         <div class="container__form">
                             <div class="container__forms">
                                 <label class="form__label" for="dni">DNI</label>
@@ -24,11 +24,10 @@
                                 <label class="form__label" for="password">Contraseña</label>
                                 <input class="form__input" type="password" name="password" id="password" placeholder="Contraseña">
                                 <?php
-                                   $error= htmlspecialchars($_GET["error"]) ;
-                                   if($error==1){
-                                       echo "<p class='login__error'>Error: usuario o contraseña incorrecta<p>";
-                                   }
-                                    
+                                $error = htmlspecialchars($_GET["error"]);
+                                if ($error == 1) {
+                                    echo "<p class='login__error'>Error: usuario o contraseña incorrecta<p>";
+                                }
                                 ?>
                             </div> 
                         </div>

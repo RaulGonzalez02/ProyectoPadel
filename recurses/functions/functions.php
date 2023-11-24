@@ -39,3 +39,12 @@ function aniadirUser($name,$lastname,$dni,$phone,$email,$password){
         }
     }
 }
+
+function calendarioDiasMes($mes){
+    $diasMes=[];
+    if($mes==2){
+        for($i=1;$i<=28;$i++){
+            $diasMes[$i]=$i;
+        }
+    }
+}
