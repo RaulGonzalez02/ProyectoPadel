@@ -1,0 +1,65 @@
+@font-face {
+    font-family: rlight;
+    src: url(../assets/fonts/Roboto-Light.ttf);
+}
+@font-face {
+    font-family: rmedium;
+    src: url(../assets/fonts/Roboto-Medium.ttf);
+}
+body{
+    background: url(../assets/images/padel2.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container{
+    max-width: 1200px;
+    min-height: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+.principal__title{
+    text-align: center;
+    padding: 20px 0px;
+    font-family: rmedium;
+}
+.reservas__section{
+    display: flex;
+    justify-content: center;
+}
+.h2__reservas{
+    padding: 0px 0px 20px 190px;
+    font-family: rmedium;
+    font-size: 1.5rem;
+}
+.table{
+    width: 800px;
+    text-align: center;
+}
+.eliminar{
+    color: #ea3f3f;
+}
+
+.section__botones{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 40px 0px;
+}
+.link__botones{
+    margin: 0px 10px;
+    padding: 10px;
+    width: 150px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #1C70B6;
+    background-color: #1C70B6;
+    color: #ffffff;
+    font-family: rlight;
+}
+.link__botones:hover{
+    background-color: #ffffff;
+    color: #1C70B6;
+}
+

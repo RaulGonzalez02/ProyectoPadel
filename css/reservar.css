@@ -1,0 +1,96 @@
+@font-face {
+    font-family: rlight;
+    src: url(../assets/fonts/Roboto-Light.ttf);
+}
+@font-face {
+    font-family: rmedium;
+    src: url(../assets/fonts/Roboto-Medium.ttf);
+}
+body{
+    background: url(../assets/images/padel2.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container{
+    margin: 0 auto;
+    max-width: 1200px;
+    min-height: 600px;
+}
+.main{
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+.container__flex{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0px;
+    align-items: center;
+    padding: 10px 0px;
+}
+.alert__container{
+    width: 500px;
+    text-align: center;
+}
+.container__pistascentral{
+    text-align: center;
+}
+.img__pistas{
+    padding: 10px;
+    width: 150px;
+}
+.h2__horarios{
+    text-align: center;
+    font-family: rmedium;
+}
+.p__horarios{
+    font-family: rlight;
+    padding: 0px 10px;
+}
+.container__text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form{
+    margin: 40px 0px;
+}
+.form__reservas{
+    border: 1px solid #1C70B6;
+    text-align: center;
+    padding: 5px 10px;
+    margin: 10px 0px;
+    width: 500px;
+    background-color: #1C70B6;
+    border-radius: 5px;
+}
+.p__horarios--hora{
+    color: #ffffff;
+}
+
+.section__botones{
+    text-align: center;
+    margin: 0px 0px 10px;
+    padding: 0px 0px 20px;
+}
+.link__botones{
+    padding: 10px;
+    width: 200px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #1C70B6;
+    background-color: #1C70B6;
+    color: #ffffff;
+    font-family: rlight;
+}
+.link__botones:hover{
+    background-color: #ffffff;
+    color: #1C70B6;
+}
+
+.ocupado{
+    background-color: #b61f1c;
+}
+.libre{
+    background-color: #1cb64d; 
+}
+

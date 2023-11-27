@@ -1,3 +1,11 @@
+@font-face {
+    font-family: rlight;
+    src: url(../assets/fonts/Roboto-Light.ttf);
+}
+@font-face {
+    font-family: rmedium;
+    src: url(../assets/fonts/Roboto-Medium.ttf);
+}
 body{
     background-color: #071823ca;
     max-width: 1200px;
@@ -26,9 +34,11 @@ body{
 .container__title{
     font-size: 3.5rem;
     margin-bottom: 0;
+    font-family: rmedium;
 }
 .container__subtitle{
     font-size: 1.75rem;
+    font-family: rlight;
 }
 .container__link{
     border: 2px groove #071823ca;
@@ -42,4 +52,20 @@ body{
 .container__logo{
     display: inline-block;
     width: 40%;
+}
+
+.link__botones{
+    padding: 10px;
+    width: 200px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #1C70B6;
+    background-color: #1C70B6;
+    color: #ffffff;
+    font-family: rlight;
+    text-align: center;
+}
+.link__botones:hover{
+    background-color: #ffffff;
+    color: #1C70B6;
 }
