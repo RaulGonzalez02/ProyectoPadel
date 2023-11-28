@@ -28,6 +28,7 @@ body{
     justify-content: center;
 }
 .h2__reservas{
+    text-align: center;
     padding: 0px 0px 20px 190px;
     font-family: rmedium;
     font-size: 1.5rem;
@@ -37,7 +38,7 @@ body{
     text-align: center;
 }
 .eliminar{
-    color: #ea3f3f;
+    color: #f20505;
 }
 
 .section__botones{

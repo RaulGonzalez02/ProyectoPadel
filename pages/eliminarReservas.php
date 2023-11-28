@@ -1,7 +1,11 @@
 <?php
 
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
-
+//para incluir las funciones que haya en functions.php
+include '../recurses/functions/functions.php';
+session_start();
+$bd = conexionBD();
+//echo $_SESSION['user'];
+$fecha=htmlspecialchars($_GET['fecha']);
+$hora=htmlspecialchars($_GET['hora']);
+$dni=$_SESSION['user'];
+deleteReserva($dni, $fecha, $hora);
