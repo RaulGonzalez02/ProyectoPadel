@@ -32,6 +32,7 @@
                             </div> 
                         </div>
                         <div class="link__login">
+                            <a class="link__form" href="../index.php">Volver al Inicio</a>
                             <a class="link__form" href="../pages/register.php?error=0">No tengo cuenta todavía</a>
                         </div>
                         <div class="botton__form">

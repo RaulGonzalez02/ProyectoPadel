@@ -1,35 +1,35 @@
 <?php
-//para incluir las funciones que haya en functions.php
-include '../recurses/functions/functions.php';
+    //para incluir las funciones que haya en functions.php
+    include '../recurses/functions/functions.php';
 
-$dni = htmlspecialchars($_POST["dni"]);
-$password = htmlspecialchars($_POST["password"]);
-//echo $dni . "<br>";
-//echo $password;
+    $dni = htmlspecialchars($_POST["dni"]);
+    $password = htmlspecialchars($_POST["password"]);
+    //echo $dni . "<br>";
+    //echo $password;
 
-if ($dni != "" && $password != "") {
-    $bd = conexionBD();
-    $sql = consultaLogin($dni, $password);
-    $users = $bd->query($sql);
-    $user = $users->rowCount();
-    $name;
-    //echo $user;
-    foreach ($users as $u) {
-        $name = $u['nombre'];
-    }
-    //comprueba que la consulta nos ha devuelto solo una 1 fila que es la que indica que no hay ningun usuario repetido.
-    if ($user == 1) {
-        //echo "login correcto";
-        //crea la cookie para almacenar el nombre del usuario que expira en 20 dias
-        setcookie("guardarNombre", $name, time() + 20 * 24 * 60 * 60);
-        session_start();
-        $_SESSION['user'] = $dni;
+    if ($dni != "" && $password != "") {
+        $bd = conexionBD();
+        $sql = consultaLogin($dni, $password);
+        $users = $bd->query($sql);
+        $user = $users->rowCount();
+        $name;
+        //echo $user;
+        foreach ($users as $u) {
+            $name = $u['nombre'];
+        }
+        //comprueba que la consulta nos ha devuelto solo una 1 fila que es la que indica que no hay ningun usuario repetido.
+        if ($user == 1) {
+            //echo "login correcto";
+            //crea la cookie para almacenar el nombre del usuario que expira en 20 dias
+            setcookie("guardarNombre", $name, time() + 20 * 24 * 60 * 60);
+            session_start();
+            $_SESSION['user'] = $dni;
+        } else {
+            header('Location:./log_in.php?error=1');
+        }
     } else {
         header('Location:./log_in.php?error=1');
     }
-} else {
-    header('Location:./log_in.php?error=1');
-}
 ?>
 <!doctype html>
 <html lang="es">
@@ -83,7 +83,7 @@ if ($dni != "" && $password != "") {
             <a class="link__botones" href="../pages/aniadirReservas.php">Reservar</a><br>
 
             <!--Nos llevara al fichero cerrarSesion donde borra la cookie y nos volvera llevar al index.php -->
-            <a class="link__botones" href="./cerrarSesion.php">Cerrar sesion</a><br>
+            <a class="link__botones" href="../index.php">Cerrar sesion</a><br>
             </section>
         </div>
     </body>

@@ -55,6 +55,7 @@
                         }
                         ?>
                         <div class="link__login">
+                            <a class="link__form" href="../index.php">Volver al inicio</a>
                             <a class="link__form" href="../pages/log_in.php?error=0">Ya estoy registrado</a>
                         </div>
                         <div class="botton__form">

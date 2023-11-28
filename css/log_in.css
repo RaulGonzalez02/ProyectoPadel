@@ -94,7 +94,9 @@ body{
     color: #ffffff;
 }
 .link__login{
-    text-align: end;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 10px 0px;
 }
 .link__form{
@@ -109,4 +111,7 @@ body{
 
 .login__error{
     color: red;
+}
+.login__resgiter{
+    color:#576D7A;
 }

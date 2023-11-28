@@ -93,8 +93,10 @@ body{
 }
 
 .link__login{
-    text-align: end;
-    margin: 10px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 20px;
 }
 .link__form{
     text-decoration: none;
