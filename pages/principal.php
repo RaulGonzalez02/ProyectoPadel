@@ -38,7 +38,7 @@ if (!isset($_SESSION['user'])) {
         header('Location:../pages/log_in.php?error=1');
     }
 }else{
-    $name=$_COOKIE['guardarNombre'];
+    $name= htmlspecialchars($_COOKIE['guardarNombre']);
 }
 ?>
 

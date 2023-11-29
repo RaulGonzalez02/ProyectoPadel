@@ -43,7 +43,7 @@ function aniadirUser($name, $lastname, $dni, $phone, $email, $password) {
         $resultIns = $bd->query($ins);
 
         if ($resultIns) {
-            header('Location: ../../pages/log_in.php?error=2');
+            header('Location: ../../pages/log_in.php?error=1');
         }
     }
 }
@@ -58,8 +58,17 @@ function consultaReservas($dni) {
 function deleteReserva($dni, $fecha, $hora) {
     $bd = conexionBD();
     $sql = "delete from jugadores_pista where dni='$dni' and fecha='$fecha' and hora='$hora'";
-    $delete=$bd->query($sql);
-    if($delete){
-        header('Location: principal.php');
+    $delete = $bd->query($sql);
+    if ($delete) {
+        header('Location: ../../pages/principal.php');
+    }
+}
+
+function updatePass($dni, $pass) {
+    $bd = conexionBD();
+    $sql = "update jugadores set contraseña='$pass' where dni='$dni'";
+    $update = $bd->query($sql);
+    if ($update) {
+        header('Location: ../../pages/log_in.php?error=0');
     }
 }

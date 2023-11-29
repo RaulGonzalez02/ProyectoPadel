@@ -6,7 +6,6 @@ session_start();
 //para borrar todas las sesiones que existan.
 $_SESSION = array();
 session_destroy();
-
 //para que te lleve al login
 header('Location:./log_in.php?error=0');
 setcookie("guardarNombre", "",time()-1);
