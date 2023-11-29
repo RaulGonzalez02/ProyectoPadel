@@ -1,10 +1,10 @@
 <?php
-//para incluir las funciones que haya en functions.php
-include '../recurses/functions/functions.php';
-session_start();
-if (!isset($_SESSION['user'])) {
-    
-}
+    //para incluir las funciones que haya en functions.php
+    include '../recurses/functions/functions.php';
+    session_start();
+    if (!isset($_SESSION['user'])) {
+
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +40,17 @@ if (!isset($_SESSION['user'])) {
                     </section>
                     <section class="section__horarios">
                         <h2 class="h2__horarios">Horarios disponibles</h2>
-                        <form class="form" action="" method="">
+                        <form class="form" action="" method="POST">
+                            <div class="form__select">
+                                <input class="select" type="date" name="fecha" id="fecha">
+                                <select class="select" name="pista" id="pista">
+                                    <option value="pista" disabled selected>Selecciona Pista</option>
+                                    <option name="1" value="1">1</option>
+                                    <option name="2" value="2">2</option>
+                                    <option name="3" value="3">3</option>
+                                </select>
+                            </div>
+                            
                             <div class="form__reservas">
                                 <div class="container__text">
                                     <input name="hora" type="radio">
@@ -77,6 +87,9 @@ if (!isset($_SESSION['user'])) {
                                     <label class="p__horarios p__horarios--hora" for="">22:00</label>
                                 </div>
                             </div>
+                            <div class="form__button">
+                                <button class="link__reserva" type="submit">Reservar</button>
+                            </div    
                         </form>
                     </section>
                 </div>
@@ -89,6 +102,10 @@ if (!isset($_SESSION['user'])) {
         </div>
     </body>
 </html>
+
+
+
+
 
 
 

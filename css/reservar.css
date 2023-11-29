@@ -54,6 +54,21 @@ body{
 .form{
     margin: 40px 0px;
 }
+.form__select{
+    text-align: center;
+    margin: 0px 0px 20px;
+}
+.select{
+    width: 40%;
+    border-radius: 5px;
+    color: #1C70B6;
+    height: 30px;
+    font-family: rlight;
+    outline: none;
+    padding: 0px 5px;
+    border: 1px solid #1C70B6;
+}
+
 .form__reservas{
     border: 1px solid #1C70B6;
     text-align: center;
@@ -86,11 +101,32 @@ body{
     background-color: #ffffff;
     color: #1C70B6;
 }
-
+ .form__button{
+    margin: 40px 0px;
+    text-align: center;
+ }
+.link__reserva{
+    text-align: center;
+    background-color: #b6901c;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: rlight;
+    font-size: 1.2rem;
+    padding: 5px 0px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    border: 1px solid #b6901c;
+}
+.link__reserva:hover{
+    background-color: #9b7a18;
+    border: 1px solid #9b7a18;
+}
 .ocupado{
     background-color: #b61f1c;
 }
 .libre{
     background-color: #1cb64d; 
 }
+
 

@@ -1,0 +1,119 @@
+@font-face {
+    font-family: rlight;
+    src: url(../assets/fonts/Roboto-Light.ttf);
+}
+@font-face {
+    font-family: rmedium;
+    src: url(../assets/fonts/Roboto-Medium.ttf);
+}
+body{
+    background-color: #576D7A;
+}
+.container{
+    width: 1080px;
+    margin: 0 auto;
+    background-color: #ffffff; 
+    border-radius: 5px;
+}
+.main{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 650px;
+}
+.section__form{
+    width: 50%;
+    margin: 0px 0px 0px 40px;
+}
+.form__img{
+    border-radius: 5px;
+    width: 500px;
+    height: 100%;
+}
+
+.section__form1{
+    width: 50%;
+    text-align: center;
+    margin: 0px 0px 0px 40px;
+}
+.form{
+    margin: 80px 30px 0px 0px;
+}
+.form__h1{
+    font-family: rmedium;
+    color: #576D7A;
+    font-size: 3.4rem;
+}
+.container__form{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.container__forms{
+    display: flex;
+    flex-direction: column;
+}
+.form__label{
+    text-align: left;
+    padding: 5px;
+    font-family: rmedium;
+    color: #576D7A;
+}
+.form__input{
+    outline: none;
+    padding: 0px 5px;
+    width: 450px;
+    height: 30px;
+    font-family: rlight;
+    color: #576D7A;
+    border: none;
+    border-bottom: 1px solid #6D5736;
+    margin: 10px 0px;
+}
+.form__input:hover{
+    color: #576D7A;
+}
+.botton__form{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px;
+}
+.form__link{
+    padding: 10px 200px;
+    border: 1px solid #6D5736;
+    text-decoration: none;
+    color: #576D7A;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: rlight;
+    transition: background-color 1s ease;
+}
+.form__link:hover{
+    background-color: #576D7A;
+    color: #ffffff;
+}
+.link__login{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 10px;
+}
+.link__form{
+    text-decoration: none;
+    font-family: rlight;
+    color: #576D7A;
+    padding: 0px 10px 0px 0px;
+}
+.link__form:hover{
+    text-decoration: underline;
+}
+
+.login__error{
+    color: red;
+}
+.login__resgiter{
+    color:#576D7A;
+}
+
+
