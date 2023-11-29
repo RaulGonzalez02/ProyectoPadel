@@ -10,7 +10,7 @@
     $email = htmlspecialchars($_POST["email"]);
     $password = htmlspecialchars($_POST["password"]);
     
-    $pass = password_hash($password, PASSWORD_DEFAULT);
+    $pass = hash("sha256", $password);
 
     if ($name != "" && $lastname != "" && $dni != "" && $phone != "" && $email != "" && $pass != "") {
         //echo "campos completados";

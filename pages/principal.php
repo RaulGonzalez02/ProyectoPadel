@@ -1,31 +1,33 @@
 <?php
-    //para incluir las funciones que haya en functions.php
-    include '../recurses/functions/functions.php';
+//para incluir las funciones que haya en functions.php
+include '../recurses/functions/functions.php';
 
+session_start();
+if (!isset($_SESSION['user'])) {
     $dni = htmlspecialchars($_POST["dni"]);
     $password = htmlspecialchars($_POST["password"]);
-    
-
-
-    if ($dni != "" && $pass != "") {
+    if ($dni != "" && $password != "") {
+        $pass_hash= hash("sha256", $password);
         $bd = conexionBD();
         $sql = consultaLogin($dni);
         $users = $bd->query($sql);
         $user = $users->rowCount(); // Obtengo la fila de usuario correspondiente
-        
         //Comprueba que la consulta nos ha devuelto solo una 1 fila que es la que indica que no hay ningun usuario repetido.
         if ($user == 1) {
+            $name;
+            $hashed_password;
             //Sacamos del usuario su contraseña cifrada
-            $hashed_password = $user['contraseña'];
+            foreach($users as $u){
+                $name=$u['nombre'];
+                $hashed_password=$u['contraseña'];
+            }
             //verificamos la contraseña introducida en el login con la cifrada con la funcion la verifica
-            if(password_verify($password, $hashed_password)){
-                $name = $user['nombre'];
+            if ($pass_hash==$hashed_password) {
+                
                 //Echo "login correcto";
                 //Crea la cookie para almacenar el nombre del usuario que expira en 20 dias
                 setcookie("guardarNombre", $name, time() + 20 * 24 * 60 * 60);
-                session_start();
                 $_SESSION['user'] = $dni;
-
             } else {
                 header('Location: ../pages/log_in.php?error=1');
             }
@@ -35,6 +37,9 @@
     } else {
         header('Location:../pages/log_in.php?error=1');
     }
+}else{
+    $name=$_COOKIE['guardarNombre'];
+}
 ?>
 
 <!doctype html>
