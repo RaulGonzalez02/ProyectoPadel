@@ -9,11 +9,13 @@
     $phone = htmlspecialchars($_POST["phone"]);
     $email = htmlspecialchars($_POST["email"]);
     $password = htmlspecialchars($_POST["password"]);
+    
+    $pass = password_hash($password, PASSWORD_DEFAULT);
 
-    if ($name != "" && $lastname != "" && $dni != "" && $phone != "" && $email != "" && $password != "") {
+    if ($name != "" && $lastname != "" && $dni != "" && $phone != "" && $email != "" && $pass != "") {
         //echo "campos completados";
         $bd= conexionBD();
-        aniadirUser($name, $lastname, $dni, $phone, $email, $password);
+        aniadirUser($name, $lastname, $dni, $phone, $email, $pass);
 
     } else {
         header('Location:../../pages/register.php?error=1');

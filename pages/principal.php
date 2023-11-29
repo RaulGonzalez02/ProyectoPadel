@@ -1,40 +1,42 @@
 <?php
-//para incluir las funciones que haya en functions.php
-include '../recurses/functions/functions.php';
-session_start();
-if(!isset($_SESSION['user'])){
-    
-$dni = htmlspecialchars($_POST["dni"]);
-$password = htmlspecialchars($_POST["password"]);
-//echo $dni . "<br>";
-//echo $password;
+    //para incluir las funciones que haya en functions.php
+    include '../recurses/functions/functions.php';
 
-if ($dni != "" && $password != "") {
-    $bd = conexionBD();
-    $sql = consultaLogin($dni, $password);
-    $users = $bd->query($sql);
-    $user = $users->rowCount();
-    $name;
-    //echo $user;
-    foreach ($users as $u) {
-        $name = $u['nombre'];
-    }
-    //comprueba que la consulta nos ha devuelto solo una 1 fila que es la que indica que no hay ningun usuario repetido.
-    if ($user == 1) {
-        //echo "login correcto";
-        //crea la cookie para almacenar el nombre del usuario que expira en 20 dias
-        setcookie("guardarNombre", $name, time() + 20 * 24 * 60 * 60);
-        $_SESSION['user'] = $dni;
+    $dni = htmlspecialchars($_POST["dni"]);
+    $password = htmlspecialchars($_POST["password"]);
+    
+
+
+    if ($dni != "" && $pass != "") {
+        $bd = conexionBD();
+        $sql = consultaLogin($dni);
+        $users = $bd->query($sql);
+        $user = $users->rowCount(); // Obtengo la fila de usuario correspondiente
+        
+        //Comprueba que la consulta nos ha devuelto solo una 1 fila que es la que indica que no hay ningun usuario repetido.
+        if ($user == 1) {
+            //Sacamos del usuario su contraseña cifrada
+            $hashed_password = $user['contraseña'];
+            //verificamos la contraseña introducida en el login con la cifrada con la funcion la verifica
+            if(password_verify($password, $hashed_password)){
+                $name = $user['nombre'];
+                //Echo "login correcto";
+                //Crea la cookie para almacenar el nombre del usuario que expira en 20 dias
+                setcookie("guardarNombre", $name, time() + 20 * 24 * 60 * 60);
+                session_start();
+                $_SESSION['user'] = $dni;
+
+            } else {
+                header('Location: ../pages/log_in.php?error=1');
+            }
+        } else {
+            header('Location: ../pages/log_in.php?error=1');
+        }
     } else {
-        header('Location:./log_in.php?error=1');
+        header('Location:../pages/log_in.php?error=1');
     }
-} else {
-    header('Location:./log_in.php?error=1');
-}
-}else{
-    $name=$_COOKIE['guardarNombre'];
-}
 ?>
+
 <!doctype html>
 <html lang="es">
     <head>

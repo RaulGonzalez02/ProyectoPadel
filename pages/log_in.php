@@ -24,10 +24,10 @@
                                 <label class="form__label" for="password">Contraseña</label>
                                 <input class="form__input" type="password" name="password" id="password" placeholder="Contraseña">
                                 <?php
-                                $error = htmlspecialchars($_GET["error"]);
-                                if ($error == 1) {
-                                    echo "<p class='login__error'>Error: usuario o contraseña incorrecta<p>";
-                                }
+                                    $error = htmlspecialchars($_GET["error"]);
+                                    if ($error == 1) {
+                                        echo "<p class='login__error'>Error: usuario o contraseña incorrecta<p>";
+                                    }
                                 ?>
                             </div> 
                         </div>

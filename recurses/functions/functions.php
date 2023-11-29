@@ -19,8 +19,8 @@ function conexionBD() {
     }
 }
 
-function consultaLogin($dni, $pass) {
-    $sql = "select nombre, apellidos  from jugadores where contraseña='$pass' and dni='$dni'";
+function consultaLogin($dni) {
+    $sql = "select nombre, apellidos, contraseña from jugadores where dni='$dni'";
     return $sql;
 }
 
@@ -36,11 +36,9 @@ function aniadirUser($name, $lastname, $dni, $phone, $email, $password) {
         // El usuario ya existe, redirigir con un mensaje de error
         header('Location:../../pages/register.php?error=2');
     } else {
-        // Generar el hash de la contraseña
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         // Insertar el nuevo usuario con la contraseña cifrada en la base de datos
-        $ins = "INSERT INTO jugadores (dni, nombre, apellidos, telefono, contraseña, email) VALUES ('$dni', '$name', '$lastname', '$phone', '$hashedPassword', '$email')";
+        $ins = "INSERT INTO jugadores (dni, nombre, apellidos, telefono, contraseña, email) VALUES ('$dni', '$name', '$lastname', '$phone', '$password', '$email')";
 
         $resultIns = $bd->query($ins);
 
