@@ -17,5 +17,5 @@ Esta aplicación esta destinada a la reserva de pistas de pádel, ofreciendo a l
 
 ## Participantes del proyecto: 
 
-Raúl Gónzalez <br>
+Raúl González <br>
 Diego Rubio
