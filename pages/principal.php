@@ -14,9 +14,8 @@ if (!isset($_SESSION['user'])) {
         //nos conectamos a la base de datos
         $bd = conexionBD();
         //guardamos la sentencia sql para luego utilizarla
-        $sql = consultaLogin($dni);
-        $users = $bd->query($sql);
-        $user = $users->rowCount(); // Obtengo la fila de usuario correspondiente
+        $users = consultaLogin($dni);
+        $user = $users->rowCount();// Obtengo la fila de usuario correspondiente
         //Comprueba que la consulta nos ha devuelto solo una 1 fila que es la que indica que no hay ningun usuario repetido.
         if ($user == 1) {
             $name;

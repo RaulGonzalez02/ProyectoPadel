@@ -43,19 +43,19 @@ setcookie("changeCookie", "", time() - 1);
                                 <label class="form__label" for="password">Contraseña</label>
                                 <input class="form__input" type="password" name="password" id="password" placeholder="Contraseña">
                                 <?php
-                                    $error = htmlspecialchars($_GET["error"]);
-                                    //si error es 1 mostramos mensaje de error
-                                    if ($error == 1) {
-                                        echo "<p class='login__error'>Error: usuario o contraseña incorrecta<p>";
-                                    }else if($error == 2){
-                                        echo "<p class='login__resgiter'>Usuario Registrado<p>";
-                                    }
+                                $error = htmlspecialchars($_GET["error"]);
+                                //si error es 1 mostramos mensaje de error
+                                if ($error == 1) {
+                                    echo "<p class='login__error'>Error: usuario o contraseña incorrecta<p>";
+                                } else if ($error == 2) {
+                                    echo "<p class='login__resgiter'>Usuario Registrado<p>";
+                                }
                                 ?>
                             </div> 
                             <!-- FIN CONTAINER FORMS-->
                         </div>
                         <!-- FIN CONTAINER FORM-->
-                        
+
                         <!--INICIO LINK LOGIN-->
                         <div class="link__login">
                             <a class="link__form" href="../index.php">Volver al Inicio</a>
@@ -63,7 +63,7 @@ setcookie("changeCookie", "", time() - 1);
                             <a class="link__form" href="../pages/register.php?error=0">No tengo cuenta</a>
                         </div>
                         <!--FIN LINK LOGIN-->
-                        
+
                         <!--INICIO BOTTON FORM-->
                         <div class="botton__form">
                             <input type="submit" class="form__link">

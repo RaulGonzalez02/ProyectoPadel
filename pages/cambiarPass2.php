@@ -9,11 +9,11 @@ if (!isset($_COOKIE["changeCookie"])) {
         //echo $_POST['dni'];
         $dni = htmlspecialchars($_POST['dni']);
         $bd = conexionBD();
-        $sql = consultaLogin($dni);
-        $user = $bd->query($sql);
+        $users = consultaLogin($dni);
+        $user=$users->rowCount();
         //echo $user->rowCount();
         //comprobamos que la consulta devuelve 1
-        if ($user->rowCount() != 1) {
+        if ($user != 1) {
             header('Location:../pages/cambiarPass1.php?error=1');
         } else {
             $_SESSION['pass'] = $dni;

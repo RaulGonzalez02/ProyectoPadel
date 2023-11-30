@@ -15,13 +15,21 @@ function conexionBD() {
         $bd = new PDO($cadena_conexion, $usuario, $clave);
         return $bd;
     } catch (Exception $e) {
-        echo "Servidor en mantenimiento";
+        return null;
     }
 }
 
 function consultaLogin($dni) {
-    $sql = "select nombre, apellidos, contraseña from jugadores where dni='$dni'";
-    return $sql;
+    $bd = conexionBD();
+    if($bd!=null){
+            try {
+        $sql = "select nombre, apellidos, contraseña from jugadores where dni='$dni'";
+        $select = $bd->query($sql);
+        return $select;
+    } catch (Exception $exc) {
+        header('Location: ../../pages/log_in.php?error=1');
+    }
+    }
 }
 
 /**
@@ -36,25 +44,31 @@ function consultaLogin($dni) {
  */
 function aniadirUser($name, $lastname, $dni, $phone, $email, $password) {
     $bd = conexionBD();
-
+    if($bd!=null){
+        
     // Comprobar si el usuario ya existe por su DNI
     $sql = "SELECT dni FROM jugadores WHERE dni='$dni'";
-    $user = $bd->query($sql);
-    $result = $user->rowCount();
+    try {
+        $user = $bd->query($sql);
+        $result = $user->rowCount();
 
-    if ($result) {
-        // El usuario ya existe, redirigir con un mensaje de error
-        header('Location:../../pages/register.php?error=2');
-    } else {
+        if ($result) {
+            // El usuario ya existe, redirigir con un mensaje de error
+            header('Location:../../pages/register.php?error=2');
+        } else {
 
-        // Insertar el nuevo usuario con la contraseña cifrada en la base de datos
-        $ins = "INSERT INTO jugadores (dni, nombre, apellidos, telefono, contraseña, email) VALUES ('$dni', '$name', '$lastname', '$phone', '$password', '$email')";
+            // Insertar el nuevo usuario con la contraseña cifrada en la base de datos
+            $ins = "INSERT INTO jugadores (dni, nombre, apellidos, telefono, contraseña, email) VALUES ('$dni', '$name', '$lastname', '$phone', '$password', '$email')";
 
-        $resultIns = $bd->query($ins);
+            $resultIns = $bd->query($ins);
 
-        if ($resultIns) {
-            header('Location: ../../pages/log_in.php?error=2');
+            if ($resultIns) {
+                header('Location: ../../pages/log_in.php?error=2');
+            }
         }
+    } catch (Exception $exc) {
+        header('Location:../../pages/register.php?error=2');
+    }
     }
 }
 
@@ -66,10 +80,14 @@ function aniadirUser($name, $lastname, $dni, $phone, $email, $password) {
  */
 function consultaReservas($dni) {
     $bd = conexionBD();
-    $prepare = $bd->prepare("select cod_pista, fecha, hora from jugadores_pista where dni=:dni");
-    $prepare->execute(array(":dni" => $dni));
-    //$select = $bd->query($sql);
-    return $prepare;
+    try {
+        $prepare = $bd->prepare("select cod_pista, fecha, hora from jugadores_pista where dni=:dni");
+        $prepare->execute(array(":dni" => $dni));
+        //$select = $bd->query($sql);
+        return $prepare;
+    } catch (Exception $exc) {
+        
+    }
 }
 
 /**
@@ -81,10 +99,13 @@ function consultaReservas($dni) {
  */
 function deleteReserva($dni, $pista, $fecha, $hora) {
     $bd = conexionBD();
-    $sql = "delete from jugadores_pista where dni='$dni' and cod_pista='$pista' and fecha='$fecha' and hora='$hora'";
-    $delete = $bd->query($sql);
-    if ($delete) {
-        header('Location: ../pages/principal.php');
+    try {
+        $sql = "delete from jugadores_pista where dni='$dni' and cod_pista='$pista' and fecha='$fecha' and hora='$hora'";
+        $delete = $bd->query($sql);
+        if ($delete) {
+            header('Location: ../pages/principal.php');
+        }
+    } catch (Exception $exc) {
     }
 }
 
@@ -96,10 +117,14 @@ function deleteReserva($dni, $pista, $fecha, $hora) {
  */
 function updatePass($dni, $pass) {
     $bd = conexionBD();
-    $sql = "update jugadores set contraseña='$pass' where dni='$dni'";
-    $update = $bd->query($sql);
-    if ($update) {
-        header('Location: ../../pages/log_in.php?error=0');
+    try {
+        $sql = "update jugadores set contraseña='$pass' where dni='$dni'";
+        $update = $bd->query($sql);
+        if ($update) {
+            header('Location: ../../pages/log_in.php?error=0');
+        }
+    } catch (Exception $exc) {
+        header('Location: ../../pages/log_in.php?error=1');
     }
 }
 
@@ -150,14 +175,18 @@ function insertHoras($dni, $cod_pista, $fecha, $hora) {
  */
 function comprobarReservas($pista, $fecha, $hora) {
     $bd = conexionBD();
-    $prepare = $bd->prepare("select * from jugadores_pista where cod_pista=:cod_pista and fecha=:fecha and hora=:hora");
-    $prepare->execute(array(":cod_pista" => $pista, ":fecha" => $fecha, ":hora" => $hora));
-    $count = $prepare->rowCount();
-    if ($count >= 1) {
-        return false;
-    } else {
-        if ($count == 0) {
-            return true;
+    try {
+        $prepare = $bd->prepare("select * from jugadores_pista where cod_pista=:cod_pista and fecha=:fecha and hora=:hora");
+        $prepare->execute(array(":cod_pista" => $pista, ":fecha" => $fecha, ":hora" => $hora));
+        $count = $prepare->rowCount();
+        if ($count >= 1) {
+            return false;
+        } else {
+            if ($count == 0) {
+                return true;
+            }
         }
+    } catch (Exception $exc) {
+        header("Location: ../../pages/aniadirReservas.php?error=1");
     }
 }
