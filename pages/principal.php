@@ -15,7 +15,12 @@ if (!isset($_SESSION['user'])) {
         $bd = conexionBD();
         //guardamos la sentencia sql para luego utilizarla
         $users = consultaLogin($dni);
-        $user = $users->rowCount();// Obtengo la fila de usuario correspondiente
+        if (gettype($users) == null) {
+            header('Location: ../pages/log_in.php?error=1');
+        } else {
+            $user=$users->rowCount();
+        }
+
         //Comprueba que la consulta nos ha devuelto solo una 1 fila que es la que indica que no hay ningun usuario repetido.
         if ($user == 1) {
             $name;
@@ -110,7 +115,7 @@ else {
                                                     </div>
                                                     <div class='modal-footer'>
                                                     <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                    <a href='./eliminarReservas.php?fecha=" . $reserva['fecha'] . "&hora=" . $reserva['hora'] . "&cod_pista=" . $reserva['cod_pista']. "' class='btn btn-primary'>Confirmar</a>
+                                                    <a href='./eliminarReservas.php?fecha=" . $reserva['fecha'] . "&hora=" . $reserva['hora'] . "&cod_pista=" . $reserva['cod_pista'] . "' class='btn btn-primary'>Confirmar</a>
                                                     </div>
                                                 </div>
                                             </div>

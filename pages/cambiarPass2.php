@@ -10,7 +10,11 @@ if (!isset($_COOKIE["changeCookie"])) {
         $dni = htmlspecialchars($_POST['dni']);
         $bd = conexionBD();
         $users = consultaLogin($dni);
-        $user=$users->rowCount();
+        if (gettype($users) == null) {
+            header('Location:../pages/cambiarPass1.php?error=1');
+        } else {
+            $user = $users->rowCount();
+        }
         //echo $user->rowCount();
         //comprobamos que la consulta devuelve 1
         if ($user != 1) {
@@ -55,7 +59,7 @@ if (!isset($_COOKIE["changeCookie"])) {
                             <!--FIN CONTAINER FORMS-->
                         </div>
                         <!--FIN CONTAINER FORM-->
-                        
+
                         <!--INICIO CONTAINER FORM-->
                         <div class="container__form">
                             <!--INICIO CONTAINER FORMS-->
@@ -63,17 +67,17 @@ if (!isset($_COOKIE["changeCookie"])) {
                                 <label class="form__label">Repetir Contraseña</label>
                                 <input class="form__input" type="password" name="password2" id="password2" placeholder="Repita la contraseña">
                                 <?php
-                                    $error = htmlspecialchars($_GET["error"]);
-                                    //comprobamos que error es igual a 1 y mostramos un mensaje de error
-                                    if ($error == 1) {
-                                        echo "<p class='login__error'>Error: no se ha introducido correctamente las contraseñas.<p>";
-                                    }
+                                $error = htmlspecialchars($_GET["error"]);
+                                //comprobamos que error es igual a 1 y mostramos un mensaje de error
+                                if ($error == 1) {
+                                    echo "<p class='login__error'>Error: no se ha introducido correctamente las contraseñas.<p>";
+                                }
                                 ?>
                             </div> 
                             <!--FIN CONTAINER FORMS-->
                         </div> 
                         <!--FIN CONTAINER FORM-->
-                        
+
                         <!--INICIO BOTTON FORM-->
                         <div class="botton__form">
                             <input type="submit" class="form__link">
@@ -83,7 +87,7 @@ if (!isset($_COOKIE["changeCookie"])) {
                     <!-- FIN FORM-->
                 </div>
                 <!--FIN SECTION FORM-->
-                
+
                 <!--INICIO SECTION FORM IMG-->
                 <div class="section__form">
                     <img class="form__img" src="../assets/images/log_in.jpeg" alt="">
