@@ -15,16 +15,10 @@ function conexionBD() {
         $bd = new PDO($cadena_conexion, $usuario, $clave);
         return $bd;
     } catch (Exception $e) {
-        echo "Error con la base de datos: " . $e->getMessage();
+        echo "Servidor en mantenimiento";
     }
 }
 
-/**
- * Funcion que nos devuelve una sentencia sql en este caso un select
- * 
- * @param string $dni variable de tipo de cadena
- * @return string nos devuelve una sentencia sql para un select
- */
 function consultaLogin($dni) {
     $sql = "select nombre, apellidos, contraseña from jugadores where dni='$dni'";
     return $sql;
@@ -72,9 +66,10 @@ function aniadirUser($name, $lastname, $dni, $phone, $email, $password) {
  */
 function consultaReservas($dni) {
     $bd = conexionBD();
-    $sql = "select cod_pista, fecha, hora from jugadores_pista where dni='$dni'";
-    $select = $bd->query($sql);
-    return $select;
+    $prepare = $bd->prepare("select cod_pista, fecha, hora from jugadores_pista where dni=:dni");
+    $prepare->execute(array(":dni" => $dni));
+    //$select = $bd->query($sql);
+    return $prepare;
 }
 
 /**
@@ -116,8 +111,7 @@ function updatePass($dni, $pass) {
  * @param type $fecha el dia que la queremos reservar
  * @param type $hora y la hora a la que la reservamos
  */
-
-function insertHoras($dni, $cod_pista, $fecha, $hora){
+function insertHoras($dni, $cod_pista, $fecha, $hora) {
     $bd = conexionBD();
 
     //Capturo la excepcion por si ya existe esa pista, fecha y hora en la base de datos (clave duplicada)
@@ -136,12 +130,34 @@ function insertHoras($dni, $cod_pista, $fecha, $hora){
         if ($e->errorInfo[1] === 1062) {
             // Error porque ya existe un clave
             header("Location: ../../pages/aniadirReservas.php?error=3");
-            
         } else {
             //Error por no completar todos los campos
             header("Location: ../../pages/aniadirReservas.php?error=1");
-            
         }
     }
 }
 
+/**
+ * 
+ * Funcion que comprueba que en esa hora y en ese dia la pista que queremos alquilar esta libre,
+ * si la consulta nos devuelve algo esque la pista que queremos reservar a esa hora ese dia ya esta 
+ * reservada.
+ * 
+ * @param integer $pista codigo de la pista que queremos alquilar
+ * @param string $fecha dia que queremos alquilar, en formato YYYY-MM-DD
+ * @param string $hora  hora a la queremos alquilar la pista
+ * @return bool
+ */
+function comprobarReservas($pista, $fecha, $hora) {
+    $bd = conexionBD();
+    $prepare = $bd->prepare("select * from jugadores_pista where cod_pista=:cod_pista and fecha=:fecha and hora=:hora");
+    $prepare->execute(array(":cod_pista" => $pista, ":fecha" => $fecha, ":hora" => $hora));
+    $count = $prepare->rowCount();
+    if ($count >= 1) {
+        return false;
+    } else {
+        if ($count == 0) {
+            return true;
+        }
+    }
+}
