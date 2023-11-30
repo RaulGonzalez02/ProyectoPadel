@@ -1,11 +1,13 @@
 <?php
-    //para incluir las funciones que haya en functions.php
-    include '../recurses/functions/functions.php';
+//para incluir las funciones que haya en functions.php
+include '../recurses/functions/functions.php';
 
-    session_start();
-    if (isset($_SESSION['user'])) {
-       $name=$_COOKIE['guardarNombre'];
-    }
+session_start();
+if (isset($_SESSION['user'])) {
+    $name = $_COOKIE['guardarNombre'];
+} else {
+    header('Location: ../pages/log_in.php?error=1');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +54,7 @@
                                     <option name="3" value="3">3</option>
                                 </select>
                             </div>
-                            
+
                             <div class="form__reservas">
                                 <div class="container__text">
                                     <input name="hora" type="radio" value="17:00:00">
@@ -90,16 +92,16 @@
                                 </div>
                             </div>
                             <?php
-                                if(isset($_GET["error"])){
-                                    $error = htmlspecialchars($_GET["error"]);
-                                    if ($error == 1) {
-                                        echo "<p class='login__error'>Complete todos los campos.<p>";
-                                    }else if($error == 2){
-                                        echo "<p class='login__error'>Fecha incorrecta.<p>";
-                                    }else if($error == 3){
-                                        echo "<p class='login__error'>Pista Ocupada. Por favor, introduzca una nueva.<p>";
-                                    }
+                            if (isset($_GET["error"])) {
+                                $error = htmlspecialchars($_GET["error"]);
+                                if ($error == 1) {
+                                    echo "<p class='login__error'>Complete todos los campos.<p>";
+                                } else if ($error == 2) {
+                                    echo "<p class='login__error'>Fecha incorrecta.<p>";
+                                } else if ($error == 3) {
+                                    echo "<p class='login__error'>Pista Ocupada. Por favor, introduzca una nueva.<p>";
                                 }
+                            }
                             ?>
                             <div class="form__button">
                                 <button class="link__reserva" type="submit">Reservar</button>
@@ -110,7 +112,7 @@
                 <section class="section__botones">
                     <a class="link__botones" href="principal.php">Volver</a>
                     <a class="link__botones" href="./cerrarSesion.php">Cerrar Sesión</a>
-                    
+
                 </section>
             </main>
         </div>
