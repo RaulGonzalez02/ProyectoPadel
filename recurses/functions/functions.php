@@ -107,3 +107,40 @@ function updatePass($dni, $pass) {
         header('Location: ../../pages/log_in.php?error=0');
     }
 }
+
+/**
+ * Función la cual inserta la reserva de una pista de padel.
+ * 
+ * @param type $dni del usuario que modificamos
+ * @param type $cod_pista la pista que queremos reservar
+ * @param type $fecha el dia que la queremos reservar
+ * @param type $hora y la hora a la que la reservamos
+ */
+
+function insertHoras($dni, $cod_pista, $fecha, $hora){
+
+    $bd = conexionBD();
+
+    // Comprobar si el usuario ya existe por su DNI
+    $sql = "SELECT dni FROM jugadores WHERE dni='$dni'";
+    $user = $bd->query($sql);
+    $result = $user->rowCount();
+
+    if ($result != 1) {
+        // El usuario no existe
+        header("Location: ../../pages/aniadirReservas.php?error=1");
+    } else {
+
+        // Inserto los datos en la tabla de jugadores_pista 
+        $ins = "INSERT INTO jugadores_pista (dni, cod_pista, fecha, hora) VALUES ('$dni', '$cod_pista', '$fecha', '$hora')";
+
+        $resultIns = $bd->query($ins);
+        
+
+        if (!$resultIns) {
+            header("Location: ../../pages/aniadirReservas.php?error=1");
+        }else{
+            header("Location: ../../pages/principal.php");
+        }
+    }
+}

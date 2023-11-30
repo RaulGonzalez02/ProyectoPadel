@@ -129,4 +129,8 @@ body{
     background-color: #1cb64d; 
 }
 
+.login__error{
+    color: red;
+}
+
 

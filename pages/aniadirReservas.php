@@ -1,9 +1,10 @@
 <?php
     //para incluir las funciones que haya en functions.php
     include '../recurses/functions/functions.php';
-    session_start();
-    if (!isset($_SESSION['user'])) {
 
+    session_start();
+    if (isset($_SESSION['user'])) {
+       $name=$_COOKIE['guardarNombre'];
     }
 ?>
 <!DOCTYPE html>
@@ -40,11 +41,11 @@
                     </section>
                     <section class="section__horarios">
                         <h2 class="h2__horarios">Horarios disponibles</h2>
-                        <form class="form" action="" method="POST">
+                        <form class="form" action="../recurses/php_files/addReservas.php" method="POST">
                             <div class="form__select">
                                 <input class="select" type="date" name="fecha" id="fecha">
                                 <select class="select" name="pista" id="pista">
-                                    <option value="pista" disabled selected>Selecciona Pista</option>
+                                    <option value="selecc" disabled selected>Selecciona Pista</option>
                                     <option name="1" value="1">1</option>
                                     <option name="2" value="2">2</option>
                                     <option name="3" value="3">3</option>
@@ -53,43 +54,54 @@
                             
                             <div class="form__reservas">
                                 <div class="container__text">
-                                    <input name="hora" type="radio">
+                                    <input name="hora" type="radio" value="17:00:00">
                                     <label class="p__horarios p__horarios--hora" for="">17:00</label>
                                 </div>
                             </div>
                             <div class="form__reservas">
                                 <div class="container__text">
-                                    <input name="hora" type="radio">
+                                    <input name="hora" type="radio" value="18:00:00">
                                     <label class="p__horarios p__horarios--hora" for="">18:00</label>
                                 </div>
                             </div>
                             <div class="form__reservas">
                                 <div class="container__text">
-                                    <input name="hora" type="radio">
+                                    <input name="hora" type="radio" value="19:00:00">
                                     <label class="p__horarios p__horarios--hora" for="">19:00</label>
                                 </div>
                             </div>
                             <div class="form__reservas">
                                 <div class="container__text">
-                                    <input name="hora" type="radio">
+                                    <input name="hora" type="radio" value="20:00:00">
                                     <label class="p__horarios p__horarios--hora" for="">20:00</label>
                                 </div>
                             </div>
                             <div class="form__reservas">
                                 <div class="container__text">
-                                    <input name="hora" type="radio">
+                                    <input name="hora" type="radio" value="21:00:00">
                                     <label class="p__horarios p__horarios--hora" for="">21:00</label>
                                 </div>
                             </div>
                             <div class="form__reservas">
                                 <div class="container__text">
-                                    <input name="hora" type="radio">
+                                    <input name="hora" type="radio" value="22:00:00">
                                     <label class="p__horarios p__horarios--hora" for="">22:00</label>
                                 </div>
                             </div>
+                            <?php
+                                if(isset($_GET["error"])){
+                                    $error = htmlspecialchars($_GET["error"]);
+                                    if ($error == 1) {
+                                        echo "<p class='login__error'>Complete todos los campos<p>";
+                                    }else if($error == 2){
+                                        echo "<p class='login__error'>Fecha incorrecta<p>";
+                                    }
+                                }
+                                
+                            ?>
                             <div class="form__button">
                                 <button class="link__reserva" type="submit">Reservar</button>
-                            </div    
+                            </div>    
                         </form>
                     </section>
                 </div>
