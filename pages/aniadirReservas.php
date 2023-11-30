@@ -95,6 +95,8 @@
                                         echo "<p class='login__error'>Complete todos los campos<p>";
                                     }else if($error == 2){
                                         echo "<p class='login__error'>Fecha incorrecta<p>";
+                                    }else if($error == 3){
+                                        echo "<p class='login__error'>Pista Ocupada. Por favor introduzca una nueva.<p>";
                                     }
                                 }
                                 

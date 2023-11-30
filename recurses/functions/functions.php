@@ -118,29 +118,29 @@ function updatePass($dni, $pass) {
  */
 
 function insertHoras($dni, $cod_pista, $fecha, $hora){
-
     $bd = conexionBD();
 
-    // Comprobar si el usuario ya existe por su DNI
-    $sql = "SELECT dni FROM jugadores WHERE dni='$dni'";
-    $user = $bd->query($sql);
-    $result = $user->rowCount();
-
-    if ($result != 1) {
-        // El usuario no existe
-        header("Location: ../../pages/aniadirReservas.php?error=1");
-    } else {
-
-        // Inserto los datos en la tabla de jugadores_pista 
+    try {
         $ins = "INSERT INTO jugadores_pista (dni, cod_pista, fecha, hora) VALUES ('$dni', '$cod_pista', '$fecha', '$hora')";
-
         $resultIns = $bd->query($ins);
-        
 
-        if (!$resultIns) {
-            header("Location: ../../pages/aniadirReservas.php?error=1");
-        }else{
+        if ($resultIns) {
+            //Si se insertan, te envia a la pagina principal para que puedas ver todas tus reservas
             header("Location: ../../pages/principal.php");
+        } else {
+            //Error por no completar todos los campos
+            header("Location: ../../pages/aniadirReservas.php?error=1");
+        }
+    } catch (PDOException $e) {
+        if ($e->errorInfo[1] === 1062) {
+            // Error el cual que ya existe un clave
+            header("Location: ../../pages/aniadirReservas.php?error=3");
+            
+        } else {
+            //Error por no completar todos los campos
+            header("Location: ../../pages/aniadirReservas.php?error=1");
+            
         }
     }
 }
+
