@@ -1,5 +1,3 @@
-<h1 align = "center">RESERVA PISTAS DE PADEL</h1>
-
 # Aplicación para Reserva de Pistas de Pádel
 
 Esta aplicación esta destinada a la reserva de pistas de pádel, ofreciendo a los usuarios la posibilidad de encontrar, visualizar y reservar pistas de pádel disponibles. 
