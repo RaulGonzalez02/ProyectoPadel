@@ -60,7 +60,8 @@ else {
 <html lang="es">
     <!-- INICIO HEAD -->
     <head>
-        <title>EBOPADEL</title>
+        <title>PRINCIPAL - EBOPADEL</title>
+        <link rel="shortcut icon" href="../assets/images/_bc7a8cfb-caf1-4ad6-b28f-bec41282544f.jpg" type="image/x-icon">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <!-- Link to Bootstrap CSS library hosted on a CDN with integrity and crossorigin attributes -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -71,7 +72,7 @@ else {
     <body>
         <!-- INICIO CONTAINER -->
         <div class="container">
-            <h1 class="principal__title">Bienvenido <?php echo ucfirst($name) ?></h1>
+            <h1 class="principal__title">Bienvenido/a <?php echo ucfirst($name) ?></h1>
             <h2 class="h2__reservas">RESERVAS</h2>
             <!-- INICIO SECTION -->
             <div class="reservas__section">
@@ -110,7 +111,7 @@ else {
                                                     </div>
                                                     <div class='modal-footer'>
                                                     <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                    <a href='./eliminarReservas.php?fecha=" . $reserva['fecha'] . "&hora=" . $reserva['hora'] . "' class='btn btn-primary'>Confirmar</a>
+                                                    <a href='./eliminarReservas.php?fecha=" . $reserva['fecha'] . "&hora=" . $reserva['hora'] . "&cod_pista=" . $reserva['cod_pista']. "' class='btn btn-primary'>Confirmar</a>
                                                     </div>
                                                 </div>
                                             </div>

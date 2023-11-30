@@ -59,7 +59,7 @@ function aniadirUser($name, $lastname, $dni, $phone, $email, $password) {
         $resultIns = $bd->query($ins);
 
         if ($resultIns) {
-            header('Location: ../../pages/log_in.php?error=1');
+            header('Location: ../../pages/log_in.php?error=2');
         }
     }
 }
@@ -84,12 +84,12 @@ function consultaReservas($dni) {
  * @param string $fecha fecha de la reserva que vamos a eliminar
  * @param string $hora hora de la reserva que vamo a eliminar
  */
-function deleteReserva($dni, $fecha, $hora) {
+function deleteReserva($dni, $pista, $fecha, $hora) {
     $bd = conexionBD();
-    $sql = "delete from jugadores_pista where dni='$dni' and fecha='$fecha' and hora='$hora'";
+    $sql = "delete from jugadores_pista where dni='$dni' and cod_pista='$pista' and fecha='$fecha' and hora='$hora'";
     $delete = $bd->query($sql);
     if ($delete) {
-        header('Location: ../../pages/principal.php');
+        header('Location: ../pages/principal.php');
     }
 }
 
@@ -120,6 +120,7 @@ function updatePass($dni, $pass) {
 function insertHoras($dni, $cod_pista, $fecha, $hora){
     $bd = conexionBD();
 
+    //Capturo la excepcion por si ya existe esa pista, fecha y hora en la base de datos (clave duplicada)
     try {
         $ins = "INSERT INTO jugadores_pista (dni, cod_pista, fecha, hora) VALUES ('$dni', '$cod_pista', '$fecha', '$hora')";
         $resultIns = $bd->query($ins);
@@ -133,7 +134,7 @@ function insertHoras($dni, $cod_pista, $fecha, $hora){
         }
     } catch (PDOException $e) {
         if ($e->errorInfo[1] === 1062) {
-            // Error el cual que ya existe un clave
+            // Error porque ya existe un clave
             header("Location: ../../pages/aniadirReservas.php?error=3");
             
         } else {

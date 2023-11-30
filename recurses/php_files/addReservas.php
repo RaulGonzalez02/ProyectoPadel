@@ -30,9 +30,4 @@
         header("Location: ../../pages/aniadirReservas.php?error=1");
     }
     
-    
-    
-    
-    
-
 ?>

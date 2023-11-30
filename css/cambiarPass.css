@@ -111,8 +111,10 @@ body{
 
 .login__error{
     color: red;
+    font-family: rlight;
 }
 .login__resgiter{
     color:#576D7A;
+    font-family: rlight;
 }
 
