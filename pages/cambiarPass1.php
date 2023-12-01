@@ -1,6 +1,5 @@
 <?php
-include '../recurses/functions/functions.php';
-
+    include '../recurses/functions/functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

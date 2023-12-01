@@ -1,63 +1,63 @@
 <?php
-//para incluir las funciones que haya en functions.php
-include '../recurses/functions/functions.php';
-//inicio de la sesion
-session_start();
-//comprobamos que no existe la sesion user
-if (!isset($_SESSION['user'])) {
-    $dni = htmlspecialchars($_POST["dni"]);
-    $password = htmlspecialchars($_POST["password"]);
-    //comprobamos que los campos dni y password no esten vacios
-    if ($dni != "" && $password != "") {
-        //ciframos la contraseña
-        $pass_hash = hash("sha256", $password);
-        //nos conectamos a la base de datos
-        $bd = conexionBD();
-        //guardamos la sentencia sql para luego utilizarla
-        $users = consultaLogin($dni);
-        if (gettype($users) == null) {
-            header('Location: ../pages/log_in.php?error=1');
-        } else {
-            $user=$users->rowCount();
-        }
-
-        //Comprueba que la consulta nos ha devuelto solo una 1 fila que es la que indica que no hay ningun usuario repetido.
-        if ($user == 1) {
-            $name;
-            $hashed_password;
-            //Sacamos del usuario su contraseña cifrada
-            foreach ($users as $u) {
-                $name = $u['nombre'];
-                $hashed_password = $u['contraseña'];
+    //para incluir las funciones que haya en functions.php
+    include '../recurses/functions/functions.php';
+    //inicio de la sesion
+    session_start();
+    //comprobamos que no existe la sesion user
+    if (!isset($_SESSION['user'])) {
+        $dni = htmlspecialchars($_POST["dni"]);
+        $password = htmlspecialchars($_POST["password"]);
+        //comprobamos que los campos dni y password no esten vacios
+        if ($dni != "" && $password != "") {
+            //ciframos la contraseña
+            $pass_hash = hash("sha256", $password);
+            //nos conectamos a la base de datos
+            $bd = conexionBD();
+            //guardamos la sentencia sql para luego utilizarla
+            $users = consultaLogin($dni);
+            if (gettype($users) == null) {
+                header('Location: ../pages/log_in.php?error=1');
+            } else {
+                $user=$users->rowCount();
             }
-            //verificamos la contraseña introducida en el login con la cifrada con la funcion la verifica
-            if ($pass_hash == $hashed_password) {
 
-                //Echo "login correcto";
-                //Crea la cookie para almacenar el nombre del usuario que expira en 20 dias
-                setcookie("guardarNombre", $name, time() + 20 * 24 * 60 * 60);
-                //crea la sesion user donde almacenamos el dni
-                $_SESSION['user'] = $dni;
+            //Comprueba que la consulta nos ha devuelto solo una 1 fila que es la que indica que no hay ningun usuario repetido.
+            if ($user == 1) {
+                $name;
+                $hashed_password;
+                //Sacamos del usuario su contraseña cifrada
+                foreach ($users as $u) {
+                    $name = $u['nombre'];
+                    $hashed_password = $u['contraseña'];
+                }
+                //verificamos la contraseña introducida en el login con la cifrada con la funcion la verifica
+                if ($pass_hash == $hashed_password) {
+
+                    //Echo "login correcto";
+                    //Crea la cookie para almacenar el nombre del usuario que expira en 20 dias
+                    setcookie("guardarNombre", $name, time() + 20 * 24 * 60 * 60);
+                    //crea la sesion user donde almacenamos el dni
+                    $_SESSION['user'] = $dni;
+                }
+                //si la contraseña que nos ha pasado no coincide con la de la base de datos lo redericcionamos al login
+                else {
+                    header('Location: ../pages/log_in.php?error=1');
+                }
             }
-            //si la contraseña que nos ha pasado no coincide con la de la base de datos lo redericcionamos al login
+            //si la consulta nos devuelve más o menos lineas que no sea 1 lo redericcionamos al login
             else {
                 header('Location: ../pages/log_in.php?error=1');
             }
         }
-        //si la consulta nos devuelve más o menos lineas que no sea 1 lo redericcionamos al login
+        //si los campos estan vacios lo redericcionamos al login
         else {
-            header('Location: ../pages/log_in.php?error=1');
+            header('Location:../pages/log_in.php?error=1');
         }
     }
-    //si los campos estan vacios lo redericcionamos al login
+    //si la sesion urser existe guardamos el nombre del usuario en la cookie
     else {
-        header('Location:../pages/log_in.php?error=1');
+        $name = htmlspecialchars($_COOKIE['guardarNombre']);
     }
-}
-//si la sesion urser existe guardamos el nombre del usuario en la cookie
-else {
-    $name = htmlspecialchars($_COOKIE['guardarNombre']);
-}
 ?>
 
 <!doctype html>
@@ -92,42 +92,42 @@ else {
                     </thead>
                     <tbody>
                         <?php
-                        $reservas = consultaReservas($_SESSION['user']);
-                        if ($reservas->rowCount() > 0) {
-                            $fila = 1;
-                            foreach ($reservas as $reserva) {
-                                echo "<tr>";
-                                echo "<th scope='row'>" . $reserva['cod_pista'] . "</th>";
-                                echo "<td>" . $reserva['fecha'] . "</td>";
-                                echo "<td>" . $reserva['hora'] . "</td>";
-                                echo "<td><button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#exampleModal'>
-                                            <i class='fa-solid fa-x eliminar'></i>
-                                        </button>
-                                        <div class='modal fade' id='exampleModal' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                            <div class='modal-dialog'>
-                                                <div class='modal-content'>
-                                                    <div class='modal-header'>
-                                                        <h1 class='modal-title fs-5' id='exampleModalLabel'>Eliminar Reserva</h1>
-                                                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                                    </div>
-                                                    <div class='modal-body'>¿Esta seguro que quiere elimanar la reserva seleccionada? Si esta seguro pulse confirmar, si no
-                                                        lo esta pulse cancelar.
-                                                    </div>
-                                                    <div class='modal-footer'>
-                                                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                    <a href='./eliminarReservas.php?fecha=" . $reserva['fecha'] . "&hora=" . $reserva['hora'] . "&cod_pista=" . $reserva['cod_pista'] . "' class='btn btn-primary'>Confirmar</a>
+                            $reservas = consultaReservas($_SESSION['user']);
+                            if ($reservas->rowCount() > 0) {
+                                $fila = 1;
+                                foreach ($reservas as $reserva) {
+                                    echo "<tr>";
+                                    echo "<th scope='row'>" . $reserva['cod_pista'] . "</th>";
+                                    echo "<td>" . $reserva['fecha'] . "</td>";
+                                    echo "<td>" . $reserva['hora'] . "</td>";
+                                    echo "<td><button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#exampleModal'>
+                                                <i class='fa-solid fa-x eliminar'></i>
+                                            </button>
+                                            <div class='modal fade' id='exampleModal' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                                <div class='modal-dialog'>
+                                                    <div class='modal-content'>
+                                                        <div class='modal-header'>
+                                                            <h1 class='modal-title fs-5' id='exampleModalLabel'>Eliminar Reserva</h1>
+                                                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                        </div>
+                                                        <div class='modal-body'>¿Esta seguro que quiere elimanar la reserva seleccionada? Si esta seguro pulse confirmar, si no
+                                                            lo esta pulse cancelar.
+                                                        </div>
+                                                        <div class='modal-footer'>
+                                                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                                                        <a href='./eliminarReservas.php?fecha=" . $reserva['fecha'] . "&hora=" . $reserva['hora'] . "&cod_pista=" . $reserva['cod_pista'] . "' class='btn btn-primary'>Confirmar</a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div></td>";
+                                            </div></td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr>";
+                                echo "<th scope='row' colspan='4'>No tiene ninguna reserva</th>";
+
                                 echo "</tr>";
                             }
-                        } else {
-                            echo "<tr>";
-                            echo "<th scope='row' colspan='4'>No tiene ninguna reserva</th>";
-
-                            echo "</tr>";
-                        }
                         ?>
 
                 </table>

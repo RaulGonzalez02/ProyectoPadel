@@ -1,6 +1,6 @@
 <?php
-//borramos la cookie changeCookie
-setcookie("changeCookie", "", time() - 1);
+    //borramos la cookie changeCookie
+    setcookie("changeCookie", "", time() - 1);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,13 +43,13 @@ setcookie("changeCookie", "", time() - 1);
                                 <label class="form__label" for="password">Contraseña</label>
                                 <input class="form__input" type="password" name="password" id="password" placeholder="Contraseña">
                                 <?php
-                                $error = htmlspecialchars($_GET["error"]);
-                                //si error es 1 mostramos mensaje de error
-                                if ($error == 1) {
-                                    echo "<p class='login__error'>Error: usuario o contraseña incorrecta<p>";
-                                } else if ($error == 2) {
-                                    echo "<p class='login__resgiter'>Usuario Registrado<p>";
-                                }
+                                    $error = htmlspecialchars($_GET["error"]);
+                                    //si error es 1 mostramos mensaje de error
+                                    if ($error == 1) {
+                                        echo "<p class='login__error'>Error: usuario o contraseña incorrecta<p>";
+                                    } else if ($error == 2) {
+                                        echo "<p class='login__resgiter'>Usuario Registrado<p>";
+                                    }
                                 ?>
                             </div> 
                             <!-- FIN CONTAINER FORMS-->

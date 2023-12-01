@@ -1,32 +1,32 @@
 <?php
-include '../recurses/functions/functions.php';
-//iniciamos sesion
-session_start();
-//comprobamos que existe la cookie changeCookie
-if (!isset($_COOKIE["changeCookie"])) {
-    //comprobamos que el campo dni tiene contenido
-    if (htmlspecialchars($_POST['dni']) != "") {
-        //echo $_POST['dni'];
-        $dni = htmlspecialchars($_POST['dni']);
-        $bd = conexionBD();
-        $users = consultaLogin($dni);
-        if (gettype($users) == null) {
-            header('Location:../pages/cambiarPass1.php?error=1');
+    include '../recurses/functions/functions.php';
+    //iniciamos sesion
+    session_start();
+    //comprobamos que existe la cookie changeCookie
+    if (!isset($_COOKIE["changeCookie"])) {
+        //comprobamos que el campo dni tiene contenido
+        if (htmlspecialchars($_POST['dni']) != "") {
+            //echo $_POST['dni'];
+            $dni = htmlspecialchars($_POST['dni']);
+            $bd = conexionBD();
+            $users = consultaLogin($dni);
+            if (gettype($users) == null) {
+                header('Location:../pages/cambiarPass1.php?error=1');
+            } else {
+                $user = $users->rowCount();
+            }
+            //echo $user->rowCount();
+            //comprobamos que la consulta devuelve 1
+            if ($user != 1) {
+                header('Location:../pages/cambiarPass1.php?error=1');
+            } else {
+                $_SESSION['pass'] = $dni;
+                setcookie("changeCookie", "1", time() + 360);
+            }
         } else {
-            $user = $users->rowCount();
-        }
-        //echo $user->rowCount();
-        //comprobamos que la consulta devuelve 1
-        if ($user != 1) {
             header('Location:../pages/cambiarPass1.php?error=1');
-        } else {
-            $_SESSION['pass'] = $dni;
-            setcookie("changeCookie", "1", time() + 360);
         }
-    } else {
-        header('Location:../pages/cambiarPass1.php?error=1');
     }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,11 +67,11 @@ if (!isset($_COOKIE["changeCookie"])) {
                                 <label class="form__label">Repetir Contraseña</label>
                                 <input class="form__input" type="password" name="password2" id="password2" placeholder="Repita la contraseña">
                                 <?php
-                                $error = htmlspecialchars($_GET["error"]);
-                                //comprobamos que error es igual a 1 y mostramos un mensaje de error
-                                if ($error == 1) {
-                                    echo "<p class='login__error'>Error: no se ha introducido correctamente las contraseñas.<p>";
-                                }
+                                    $error = htmlspecialchars($_GET["error"]);
+                                    //comprobamos que error es igual a 1 y mostramos un mensaje de error
+                                    if ($error == 1) {
+                                        echo "<p class='login__error'>Error: no se ha introducido correctamente las contraseñas.<p>";
+                                    }
                                 ?>
                             </div> 
                             <!--FIN CONTAINER FORMS-->

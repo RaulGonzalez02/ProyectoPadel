@@ -76,13 +76,13 @@
                         </div>
                         <!-- FIN CONTAINER FORM -->
                         <?php
-                        $error = htmlspecialchars($_GET["error"]);
-                        //si el error es igual a 1 mostramos el menseje de error
-                        if ($error == 1) {
-                            echo "<p class='register__error'>Error: complete todos los campos<p>";
-                        } else if ($error == 2) {
-                            echo "<p class='register__error'>Error: usuario ya registrado<p>";
-                        }
+                            $error = htmlspecialchars($_GET["error"]);
+                            //si el error es igual a 1 mostramos el menseje de error
+                            if ($error == 1) {
+                                echo "<p class='register__error'>Error: complete todos los campos<p>";
+                            } else if ($error == 2) {
+                                echo "<p class='register__error'>Error: usuario ya registrado<p>";
+                            }
                         ?>
                         <!-- INICIO LINK LOGIN -->
                         <div class="link__login">

@@ -1,10 +1,9 @@
 <?php
-include './recurses/functions/functions.php';
-session_start();
-$_SESSION = array();
-session_destroy();
-setcookie("guardarNombre", "",time()-1);
-
+    include './recurses/functions/functions.php';
+    session_start();
+    $_SESSION = array();
+    session_destroy();
+    setcookie("guardarNombre", "",time()-1);
 ?>
 <!doctype html>
 <html lang="es">

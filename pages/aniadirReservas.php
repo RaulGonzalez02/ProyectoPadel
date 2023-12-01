@@ -1,13 +1,13 @@
 <?php
-//para incluir las funciones que haya en functions.php
-include '../recurses/functions/functions.php';
+    //para incluir las funciones que haya en functions.php
+    include '../recurses/functions/functions.php';
 
-session_start();
-if (isset($_SESSION['user'])) {
-    $name = $_COOKIE['guardarNombre'];
-} else {
-    header('Location: ../pages/log_in.php?error=1');
-}
+    session_start();
+    if (isset($_SESSION['user'])) {
+        $name = $_COOKIE['guardarNombre'];
+    } else {
+        header('Location: ../pages/log_in.php?error=1');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,16 +92,16 @@ if (isset($_SESSION['user'])) {
                                 </div>
                             </div>
                             <?php
-                            if (isset($_GET["error"])) {
-                                $error = htmlspecialchars($_GET["error"]);
-                                if ($error == 1) {
-                                    echo "<p class='login__error'>Complete todos los campos.<p>";
-                                } else if ($error == 2) {
-                                    echo "<p class='login__error'>Fecha incorrecta.<p>";
-                                } else if ($error == 3) {
-                                    echo "<p class='login__error'>Pista Ocupada. Por favor, introduzca una nueva.<p>";
+                                if (isset($_GET["error"])) {
+                                    $error = htmlspecialchars($_GET["error"]);
+                                    if ($error == 1) {
+                                        echo "<p class='login__error'>Complete todos los campos.<p>";
+                                    } else if ($error == 2) {
+                                        echo "<p class='login__error'>Fecha incorrecta.<p>";
+                                    } else if ($error == 3) {
+                                        echo "<p class='login__error'>Pista Ocupada. Por favor, introduzca una nueva.<p>";
+                                    }
                                 }
-                            }
                             ?>
                             <div class="form__button">
                                 <button class="link__reserva" type="submit">Reservar</button>
