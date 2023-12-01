@@ -1,5 +1,6 @@
 <?php
-
+    
+    //INICIAMOS UNA SESIÓN
     session_start();
 
     //echo "existe la session";

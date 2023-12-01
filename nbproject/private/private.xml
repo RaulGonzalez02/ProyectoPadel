@@ -3,14 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/ProyectoPadel/README.md</file>
-            <file>file:/C:/xampp/htdocs/ProyectoPadel/recurses/php_files/register.php</file>
+            <file>file:/C:/xampp/htdocs/ProyectoPadel/index.php</file>
             <file>file:/C:/xampp/htdocs/ProyectoPadel/pages/log_in.php</file>
-            <file>file:/C:/xampp/htdocs/ProyectoPadel/recurses/functions/functions.php</file>
             <file>file:/C:/xampp/htdocs/ProyectoPadel/recurses/php_files/addReservas.php</file>
+            <file>file:/C:/xampp/htdocs/ProyectoPadel/pages/cambiarPass1.php</file>
+            <file>file:/C:/xampp/htdocs/ProyectoPadel/recurses/php_files/register.php</file>
+            <file>file:/C:/xampp/htdocs/ProyectoPadel/pages/eliminarReservas.php</file>
+            <file>file:/C:/xampp/htdocs/ProyectoPadel/recurses/functions/functions.php</file>
+            <file>file:/C:/xampp/htdocs/ProyectoPadel/recurses/php_files/changePass.php</file>
             <file>file:/C:/xampp/htdocs/ProyectoPadel/pages/principal.php</file>
             <file>file:/C:/xampp/htdocs/ProyectoPadel/pages/cambiarPass2.php</file>
             <file>file:/C:/xampp/htdocs/ProyectoPadel/pages/aniadirReservas.php</file>
+            <file>file:/C:/xampp/htdocs/ProyectoPadel/pages/cerrarSesion.php</file>
+            <file>file:/C:/xampp/htdocs/ProyectoPadel/pages/register.php</file>
         </group>
     </open-files>
 </project-private>

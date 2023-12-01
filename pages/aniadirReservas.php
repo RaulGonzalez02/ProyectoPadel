@@ -2,7 +2,9 @@
     //para incluir las funciones que haya en functions.php
     include '../recurses/functions/functions.php';
 
+    //creamos una sesion
     session_start();
+    //comprobamos si existe un usuario y lo guardamos en una variable
     if (isset($_SESSION['user'])) {
         $name = $_COOKIE['guardarNombre'];
     } else {
@@ -11,6 +13,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
+    <!-- INICIO HEAD -->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,10 +24,16 @@
         <!-- Link to Bootstrap CSS library hosted on a CDN with integrity and crossorigin attributes -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     </head>
+    <!-- FIN HEAD -->
+    
+    <!-- INICIO BODY -->
     <body>
+        <!-- INICIO CONTAINER -->
         <div class="container">
+            <!-- INICIO MAIN -->
             <main class="main">
                 <div class="container__flex">
+                    <!-- INICIO IMAGENES PISTA -->
                     <section class="section__pistas">
                         <div class="alert alert-success alert-dismissible fade show alert__container" role="alert">
                             <h2 class="h2__horarios">Reservas Pistas de Padel</h2>
@@ -42,11 +51,17 @@
                             </div>
                         </div>
                     </section>
+                    <!-- FIN IMAGENES PISTA -->
+                    
+                    <!-- CONTENEDOR FORMULARIO RESERVAS -->
                     <section class="section__horarios">
                         <h2 class="h2__horarios">Horarios disponibles</h2>
+                        <!-- INICIO FORMULARIO -->
                         <form class="form" action="../recurses/php_files/addReservas.php" method="POST">
                             <div class="form__select">
+                                <!-- INPUT FECHA -->
                                 <input class="select" type="date" name="fecha" id="fecha">
+                                <!-- SELECT PISTA -->
                                 <select class="select" name="pista" id="pista">
                                     <option value="selecc" disabled selected>Selecciona Pista</option>
                                     <option name="1" value="1">1</option>
@@ -54,7 +69,7 @@
                                     <option name="3" value="3">3</option>
                                 </select>
                             </div>
-
+                            <!-- FORMULARIO HORAS -->
                             <div class="form__reservas">
                                 <div class="container__text">
                                     <input name="hora" type="radio" value="17:00:00">
@@ -91,6 +106,7 @@
                                     <label class="p__horarios p__horarios--hora" for="">22:00</label>
                                 </div>
                             </div>
+                            <!-- ERRORES -->
                             <?php
                                 if (isset($_GET["error"])) {
                                     $error = htmlspecialchars($_GET["error"]);
@@ -103,16 +119,18 @@
                                     }
                                 }
                             ?>
+                            <!-- BOTÓN DE RESERVAR -->
                             <div class="form__button">
                                 <button class="link__reserva" type="submit">Reservar</button>
                             </div>    
                         </form>
+                        <!-- FIN FORMULARIO -->
                     </section>
                 </div>
+                <!-- BOTONES DE VOLVER -->
                 <section class="section__botones">
                     <a class="link__botones" href="principal.php">Volver</a>
                     <a class="link__botones" href="./cerrarSesion.php">Cerrar Sesión</a>
-
                 </section>
             </main>
         </div>
