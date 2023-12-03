@@ -64,46 +64,46 @@
                                 <!-- SELECT PISTA -->
                                 <select class="select" name="pista" id="pista">
                                     <option value="selecc" disabled selected>Selecciona Pista</option>
-                                    <option name="1" value="1">1</option>
-                                    <option name="2" value="2">2</option>
-                                    <option name="3" value="3">3</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
                                 </select>
                             </div>
                             <!-- FORMULARIO HORAS -->
                             <div class="form__reservas">
                                 <div class="container__text">
                                     <input name="hora" type="radio" value="17:00:00">
-                                    <label class="p__horarios p__horarios--hora" for="">17:00</label>
+                                    <label class="p__horarios p__horarios--hora">17:00</label>
                                 </div>
                             </div>
                             <div class="form__reservas">
                                 <div class="container__text">
                                     <input name="hora" type="radio" value="18:00:00">
-                                    <label class="p__horarios p__horarios--hora" for="">18:00</label>
+                                    <label class="p__horarios p__horarios--hora">18:00</label>
                                 </div>
                             </div>
                             <div class="form__reservas">
                                 <div class="container__text">
                                     <input name="hora" type="radio" value="19:00:00">
-                                    <label class="p__horarios p__horarios--hora" for="">19:00</label>
+                                    <label class="p__horarios p__horarios--hora">19:00</label>
                                 </div>
                             </div>
                             <div class="form__reservas">
                                 <div class="container__text">
                                     <input name="hora" type="radio" value="20:00:00">
-                                    <label class="p__horarios p__horarios--hora" for="">20:00</label>
+                                    <label class="p__horarios p__horarios--hora">20:00</label>
                                 </div>
                             </div>
                             <div class="form__reservas">
                                 <div class="container__text">
                                     <input name="hora" type="radio" value="21:00:00">
-                                    <label class="p__horarios p__horarios--hora" for="">21:00</label>
+                                    <label class="p__horarios p__horarios--hora">21:00</label>
                                 </div>
                             </div>
                             <div class="form__reservas">
                                 <div class="container__text">
                                     <input name="hora" type="radio" value="22:00:00">
-                                    <label class="p__horarios p__horarios--hora" for="">22:00</label>
+                                    <label class="p__horarios p__horarios--hora">22:00</label>
                                 </div>
                             </div>
                             <!-- ERRORES -->
@@ -128,10 +128,10 @@
                     </section>
                 </div>
                 <!-- BOTONES DE VOLVER -->
-                <section class="section__botones">
+                <div class="section__botones">
                     <a class="link__botones" href="principal.php">Volver</a>
                     <a class="link__botones" href="./cerrarSesion.php">Cerrar Sesión</a>
-                </section>
+                </div>
             </main>
         </div>
     </body>

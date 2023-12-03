@@ -11,7 +11,7 @@
     <head>
         <title>EBOPADEL</title>
         <link rel="shortcut icon" href="assets/images/_bc7a8cfb-caf1-4ad6-b28f-bec41282544f.jpg" type="image/x-icon">
-        <link rel="stylesheet" href="./css/style.css" />
+        <link rel="stylesheet" href="./css/style.css" >
     </head>
     <!-- FIN HEAD -->
 
